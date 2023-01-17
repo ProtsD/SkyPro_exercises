@@ -1,4 +1,4 @@
-package com.skypro.course2.HW1_IntrouctionOOP;
+package com.skypro.course2.hw1_introuction_oop;
 
 public class Car {
     private String brand;
