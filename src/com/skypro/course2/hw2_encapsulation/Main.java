@@ -1,4 +1,4 @@
-package com.skypro.cource2.hw2_encapsulation;
+package com.skypro.course2.hw2_encapsulation;
 
 public class Main {
     public static void main(String[] args) {

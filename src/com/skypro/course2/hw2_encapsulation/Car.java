@@ -1,4 +1,4 @@
-package com.skypro.cource2.hw2_encapsulation;
+package com.skypro.course2.hw2_encapsulation;
 
 import java.time.LocalDate;
 import java.time.Month;
