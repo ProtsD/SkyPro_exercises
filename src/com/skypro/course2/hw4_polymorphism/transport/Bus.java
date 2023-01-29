@@ -7,21 +7,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class Bus <T extends DriverWithLicC> extends Transport implements Сompeting {
-    T driver;
-    public Bus(String brand, String model, double engineVolume, T driver) {
-        super(brand, model, engineVolume);
-        this.driver = driver;
+public class Bus extends Transport<DriverWithLicC> {
+
+    public Bus(String brand, String model, double engineVolume, DriverWithLicC driver) {
+        super(brand, model, engineVolume, driver);
     }
 
     @Override
     public void start() {
-        System.out.println("Bus is driving");
+        System.out.println("Bus" + getBrand() + " is driving");
     }
 
     @Override
     public void stop() {
-        System.out.println("Bus is stopped");
+        System.out.println("Bus" + getBrand() + " is stopped");
     }
 
     @Override
@@ -31,28 +30,24 @@ public class Bus <T extends DriverWithLicC> extends Transport implements Сompet
 
     @Override
     public void pitStop() {
-        System.out.println("Bus is at pit-stop");
+        System.out.println(getBrand() + " is at pit-stop");
     }
 
     @Override
     public void printTheBestTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        System.out.println("The best time is " + dtf.format(now));
+        System.out.println("The best time of " + getBrand() + " is " + dtf.format(now));
     }
 
     @Override
     public void printMaxSpeed() {
-        System.out.println("Max speed is " + generateRandomValue(100, 150));
+        System.out.println("Max speed of " + getBrand() + " is " + generateRandomValue(100, 150));
     }
 
     private int generateRandomValue(int minValue, int maxValue) {
         int diff = maxValue - minValue;
         Random random = new Random();
         return random.nextInt(diff + 1) + minValue;
-    }
-
-    public void printInfo() {
-        System.out.println("Driver " + driver.getName() + " is behind the wheel and participate in the race");
     }
 }

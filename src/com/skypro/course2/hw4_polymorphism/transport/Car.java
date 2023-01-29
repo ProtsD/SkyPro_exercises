@@ -7,22 +7,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class Car <T extends DriverWithLicB> extends Transport implements Сompeting {
-    T driver;
+public class Car extends Transport<DriverWithLicB> {
+    //T driver;
 
-    public Car(String brand, String model, double engineVolume, T driver) {
-        super(brand, model, engineVolume);
-        this.driver = driver;
+
+    public Car(String brand, String model, double engineVolume, DriverWithLicB driver) {
+        super(brand, model, engineVolume, driver);
     }
 
     @Override
     public void start() {
-        System.out.println("Car is driving");
+        System.out.println("Car" + getBrand() + " is driving");
     }
 
     @Override
     public void stop() {
-        System.out.println("Car is stopped");
+        System.out.println("Car" + getBrand() + " is stopped");
     }
 
     @Override
@@ -32,19 +32,19 @@ public class Car <T extends DriverWithLicB> extends Transport implements Сompet
 
     @Override
     public void pitStop() {
-        System.out.println("Car is at pit-stop");
+        System.out.println(getBrand() + " is at pit-stop");
     }
 
     @Override
     public void printTheBestTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        System.out.println("The best time is " + dtf.format(now));
+        System.out.println("The best time of " + getBrand() + " is " + dtf.format(now));
     }
 
     @Override
     public void printMaxSpeed() {
-        System.out.println("Max speed is " + generateRandomValue(100, 150));
+        System.out.println("Max speed of " + getBrand() + " is " + generateRandomValue(100, 150));
     }
 
     private int generateRandomValue(int minValue, int maxValue) {
@@ -52,9 +52,4 @@ public class Car <T extends DriverWithLicB> extends Transport implements Сompet
         Random random = new Random();
         return random.nextInt(diff + 1) + minValue;
     }
-
-    public void printInfo() {
-        System.out.println("Driver " + driver.getName() + " is behind the wheel and participate in the race");
-    }
-
 }
