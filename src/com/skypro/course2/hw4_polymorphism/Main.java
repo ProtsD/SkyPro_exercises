@@ -16,7 +16,8 @@ public class Main {
                     "Car #" + i,
                     "car model " + i,
                     2.0,
-                    new DriverWithLicB("Driver #" + i + " with lic. B", true, 2030 + i));
+                    new DriverWithLicB("Driver #" + i + " with lic. B", true, 2030 + i))
+                    ;
 
             Bus bus = new Bus(
                     "Bus #" + i,
