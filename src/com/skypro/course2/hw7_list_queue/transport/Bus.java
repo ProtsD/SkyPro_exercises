@@ -3,17 +3,19 @@ package com.skypro.course2.hw7_list_queue.transport;
 import com.skypro.course2.hw7_list_queue.drivers.DriverWithLicC;
 import com.skypro.course2.hw7_list_queue.enums.SeatsCapacity;
 import com.skypro.course2.hw7_list_queue.exceptions.TransportTypeException;
+import com.skypro.course2.hw7_list_queue.service.Mechanic;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 
 public class Bus extends Transport<DriverWithLicC> {
 
     SeatsCapacity seatsCapacity;
 
-    public Bus(String brand, String model, double engineVolume, DriverWithLicC driver, SeatsCapacity seatsCapacity) {
-        super(brand, model, engineVolume, driver);
+    public Bus(String brand, String model, double engineVolume, DriverWithLicC driver, SeatsCapacity seatsCapacity, List<Mechanic> mechanicList) {
+        super(brand, model, engineVolume, driver, mechanicList);
         this.seatsCapacity = seatsCapacity;
     }
 

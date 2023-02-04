@@ -2,16 +2,18 @@ package com.skypro.course2.hw7_list_queue.transport;
 
 import com.skypro.course2.hw7_list_queue.drivers.DriverWithLicB;
 import com.skypro.course2.hw7_list_queue.enums.CarBodyType;
+import com.skypro.course2.hw7_list_queue.service.Mechanic;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 
 public class Car extends Transport<DriverWithLicB> {
     CarBodyType carBodyType;
 
-    public Car(String brand, String model, double engineVolume, DriverWithLicB driver, CarBodyType carBodyType) {
-        super(brand, model, engineVolume, driver);
+    public Car(String brand, String model, double engineVolume, DriverWithLicB driver, CarBodyType carBodyType, List<Mechanic> mechanicList) {
+        super(brand, model, engineVolume, driver, mechanicList);
         this.carBodyType = carBodyType;
     }
 
@@ -34,7 +36,9 @@ public class Car extends Transport<DriverWithLicB> {
     }
 
     @Override
-    public void printType() { System.out.println(carBodyType); }
+    public void printType() {
+        System.out.println(carBodyType);
+    }
 
     @Override
     public String toString() {
