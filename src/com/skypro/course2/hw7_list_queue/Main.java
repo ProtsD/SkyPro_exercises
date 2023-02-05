@@ -7,35 +7,52 @@ import com.skypro.course2.hw7_list_queue.enums.CarBodyType;
 import com.skypro.course2.hw7_list_queue.enums.LoadCapacity;
 import com.skypro.course2.hw7_list_queue.enums.SeatsCapacity;
 import com.skypro.course2.hw7_list_queue.exceptions.TransportTypeException;
+import com.skypro.course2.hw7_list_queue.service.Mechanic;
+import com.skypro.course2.hw7_list_queue.service.ServiceStation;
 import com.skypro.course2.hw7_list_queue.transport.Bus;
 import com.skypro.course2.hw7_list_queue.transport.Car;
 import com.skypro.course2.hw7_list_queue.transport.Transport;
 import com.skypro.course2.hw7_list_queue.transport.Truck;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
+        List<Transport> transportList = new ArrayList<>();
 
-        for (int i = 1; i <= 4; i++) {
+        ServiceStation serviceStation = new ServiceStation();
+
+        List<Mechanic> mechanicList = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            mechanicList.add(new Mechanic("Mechanic#" + i, "Companny#" + i));
+
+        }
+
+        for (int i = 1; i <= 3; i++) {
             Car car = new Car(
-                    "Car #" + i,
-                    "car model " + i,
+                    "Car#" + i,
+                    "CarModel#" + i,
                     2.0,
-                    new DriverWithLicB("Driver #" + i + " with lic. B", true, 2030 + i),
-                    CarBodyType.SUV);
+                    new DriverWithLicB("Driver#" + i + " with lic. B", true, 2030 + i),
+                    CarBodyType.SUV,
+                    mechanicList);
 
             Bus bus = new Bus(
-                    "Bus #" + i,
-                    "bus model " + i,
+                    "Bus#" + i,
+                    "BusModel#" + i,
                     2.0,
-                    new DriverWithLicC("Driver #" + i + " with lic. C", true, 2030 + i),
-                    SeatsCapacity.MIDDLE);
+                    new DriverWithLicC("Driver#" + i + " with lic. C", true, 2030 + i),
+                    SeatsCapacity.MIDDLE,
+                    mechanicList);
 
             Truck truck = new Truck(
-                    "Truck #" + i,
-                    "truck model " + i,
+                    "Truck#" + i,
+                    "TruckModel#" + i,
                     2.0,
-                    new DriverWithLicD("Driver #" + i + " with lic. D", true, 2030 + i),
-                    LoadCapacity.N3);
+                    new DriverWithLicD("Driver#" + i + " with lic. D", true, 2030 + i),
+                    LoadCapacity.N3,
+                    mechanicList);
 
             printInfo(car);
             car.printType();
@@ -64,9 +81,43 @@ public class Main {
             truck.printTheBestTime();
             System.out.println();
 
+            // Filling transport list
+            transportList.add(car);
+            transportList.add(bus);
+            transportList.add(truck);
         }
-    }
 
+        // Move transport from transport list to queue in service if it is allowed to do service for a transport
+        for (int i = 0; i < transportList.size(); i++) {
+            System.out.println(transportList.get(i).getDriver().getName());
+            System.out.println(transportList.get(i).toString());
+
+            try {
+                serviceStation.addTransportToQueue(transportList.get(i));
+                for (Mechanic mechanic : mechanicList) {
+                    System.out.println(mechanic);
+                }
+            } catch (TransportTypeException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+           System.out.println();
+        }
+
+        // Perform service and delete from queue
+        for (int i = 0; i < serviceStation.getQueueInService().size();) {
+            mechanicList.get(i).performMaintenance(serviceStation.getQueueInService().element());
+            mechanicList.get(i).repairCar(serviceStation.getQueueInService().element());
+            serviceStation.performService();
+        }
+
+        System.out.println();
+        for (Mechanic m : mechanicList) {
+            m.performMaintenance(transportList.get(1));
+        }
+        mechanicList.get(1).performMaintenance(transportList.get(1));
+
+    }
     public static void printInfo(Transport<?> transport) {
         System.out.println("Driver " + transport.getDriver().getName() + " is behind the wheel of " +
                 transport.getBrand() + " and participate in the race");

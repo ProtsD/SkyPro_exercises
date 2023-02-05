@@ -2,16 +2,18 @@ package com.skypro.course2.hw7_list_queue.transport;
 
 import com.skypro.course2.hw7_list_queue.drivers.DriverWithLicD;
 import com.skypro.course2.hw7_list_queue.enums.LoadCapacity;
+import com.skypro.course2.hw7_list_queue.service.Mechanic;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 
 public class Truck extends Transport<DriverWithLicD> {
     LoadCapacity loadCapacity;
 
-    public Truck(String brand, String model, double engineVolume, DriverWithLicD driver, LoadCapacity loadCapacity) {
-        super(brand, model, engineVolume, driver);
+    public Truck(String brand, String model, double engineVolume, DriverWithLicD driver, LoadCapacity loadCapacity, List<Mechanic> mechanicList) {
+        super(brand, model, engineVolume, driver, mechanicList);
         this.loadCapacity = loadCapacity;
     }
 

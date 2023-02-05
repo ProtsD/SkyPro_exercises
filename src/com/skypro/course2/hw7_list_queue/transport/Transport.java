@@ -1,36 +1,36 @@
 package com.skypro.course2.hw7_list_queue.transport;
 
+import com.skypro.course2.Validation;
 import com.skypro.course2.hw7_list_queue.drivers.Driver;
 import com.skypro.course2.hw7_list_queue.exceptions.TransportTypeException;
+import com.skypro.course2.hw7_list_queue.service.Mechanic;
 import com.skypro.course2.hw7_list_queue.Сompeting;
 
-public abstract class Transport<T extends Driver>implements Сompeting {
+import java.util.List;
+
+public abstract class Transport<T extends Driver> implements Сompeting {
     private final String brand;
     private final String model;
     private final double engineVolume;
 
     private T driver;
+    private List<Mechanic> mechanicList;
 
 
     public Transport(String brand,
                      String model,
                      double engineVolume,
-                     T driver) {
+                     T driver,
+                     List<Mechanic> mechanicList) {
 
-        this.brand = validateStringPar(brand, "--");
-        this.model = validateStringPar(model, "--");
-        this.engineVolume = validateDoublePar(engineVolume, 1.0);
+        this.brand = Validation.validateStringPar(brand, "--");
+        this.model = Validation.validateStringPar(model, "--");
+        this.engineVolume = Validation.validateDoublePar(engineVolume, 1.0);
         setDriver(driver);
+        this.mechanicList = mechanicList;
     }
 
-    public String validateStringPar(String string, String substitution) {
-        return (string == null || string.isBlank() || string.isEmpty()) ? substitution : string;
-    }
-
-    public double validateDoublePar(double value, double substitution) {
-        return (value <= 0.0) ? substitution : value;
-    }
-
+    // region getters-setters
     public String getBrand() {
         return brand;
     }
@@ -51,15 +51,21 @@ public abstract class Transport<T extends Driver>implements Сompeting {
         this.driver = driver;
     }
 
+    public List<Mechanic> getMechanicList() {
+        return mechanicList;
+    }
+
+    //endregion
     public abstract void start();
 
     public abstract void stop();
 
     public abstract void printType();
 
-    public abstract void makeDiagnostic () throws TransportTypeException;
+    public abstract void makeDiagnostic() throws TransportTypeException;
+
     @Override
     public String toString() {
-        return brand + " " + model + ", " + engineVolume;
+        return "brand=" + brand + ", model=" + model + ", engineVolume=" + engineVolume;
     }
 }
