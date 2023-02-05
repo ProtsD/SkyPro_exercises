@@ -7,6 +7,7 @@ import com.skypro.course2.hw8_map.service.Mechanic;
 import com.skypro.course2.hw8_map.Сompeting;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Transport<T extends Driver> implements Сompeting {
     private final String brand;
@@ -68,4 +69,6 @@ public abstract class Transport<T extends Driver> implements Сompeting {
     public String toString() {
         return "brand=" + brand + ", model=" + model + ", engineVolume=" + engineVolume;
     }
+
+
 }

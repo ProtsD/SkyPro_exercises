@@ -15,7 +15,9 @@ import com.skypro.course2.hw8_map.transport.Transport;
 import com.skypro.course2.hw8_map.transport.Truck;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -101,11 +103,11 @@ public class Main {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
-           System.out.println();
+            System.out.println();
         }
 
         // Perform service and delete from queue
-        for (int i = 0; i < serviceStation.getQueueInService().size();) {
+        for (int i = 0; i < serviceStation.getQueueInService().size(); ) {
             mechanicList.get(i).performMaintenance(serviceStation.getQueueInService().element());
             mechanicList.get(i).repairCar(serviceStation.getQueueInService().element());
             serviceStation.performService();
@@ -115,9 +117,9 @@ public class Main {
         for (Mechanic m : mechanicList) {
             m.performMaintenance(transportList.get(1));
         }
-        mechanicList.get(1).performMaintenance(transportList.get(1));
 
     }
+
     public static void printInfo(Transport<?> transport) {
         System.out.println("Driver " + transport.getDriver().getName() + " is behind the wheel of " +
                 transport.getBrand() + " and participate in the race");
