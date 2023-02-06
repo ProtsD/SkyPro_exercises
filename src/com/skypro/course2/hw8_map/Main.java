@@ -127,10 +127,13 @@ public class Main {
         Map<Transport, Mechanic> serviceLog = new HashMap<>();
         for (int i = 0; i < transportList.size(); i++) {
             int j = i;
-            if (mechanicList.size()-1 < i) j = i % mechanicList.size();
+            if (mechanicList.size() - 1 < i) j = i % mechanicList.size();
             System.out.println("i =" + i + ", j=" + j);
-            serviceLog.put(transportList.get(i), mechanicList.get(j));
+//            serviceLog.put(transportList.get(i), mechanicList.get(j));
+            serviceLog.put(transportList.get(i), (Mechanic) transportList.get(i).getMechanicList().get(j));
         }
+
+        Mechanic m = (Mechanic) transportList.get(1).getMechanicList().get(4);
         for (Map.Entry<Transport, Mechanic> log : serviceLog.entrySet()) {
             System.out.println(log.getKey() + " maintained by " + log.getValue());
         }
