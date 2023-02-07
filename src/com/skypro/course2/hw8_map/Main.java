@@ -131,8 +131,9 @@ public class Main {
             System.out.println("i =" + i + ", j=" + j);
 //            serviceLog.put(transportList.get(i), mechanicList.get(j));
             serviceLog.put(transportList.get(i), (Mechanic) transportList.get(i).getMechanicList().get(j));
+            System.out.println("test_test_test" + transportList.get(i).getMechanicList().get(j).getClass());
         }
-
+        System.out.println("test_test_test" + transportList.get(1).getMechanicList().getClass());
         Mechanic m = (Mechanic) transportList.get(1).getMechanicList().get(4);
         for (Map.Entry<Transport, Mechanic> log : serviceLog.entrySet()) {
             System.out.println(log.getKey() + " maintained by " + log.getValue());

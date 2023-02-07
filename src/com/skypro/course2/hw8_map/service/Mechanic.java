@@ -4,7 +4,7 @@ import com.skypro.course2.Validation;
 
 import java.util.Objects;
 
-public class Mechanic<T> {
+public class Mechanic {
     private String name;
     private String employerName;
 
@@ -13,10 +13,10 @@ public class Mechanic<T> {
         this.employerName = Validation.validateStringPar(employerName,"Default");
     }
 
-    public void performMaintenance(T transport) {
+    public<T> void performMaintenance(T transport) {
         System.out.println(this + " is doing maintenance on " + transport);
     }
-    public void repairCar(T transport) {
+    public<T> void repairCar(T transport) {
         System.out.println(this + " is repairing " + transport);
     }
 
@@ -29,7 +29,7 @@ public class Mechanic<T> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Mechanic<?> mechanic = (Mechanic<?>) o;
+        Mechanic mechanic = (Mechanic) o;
         return Objects.equals(name, mechanic.name) && Objects.equals(employerName, mechanic.employerName);
     }
 
