@@ -1,5 +1,6 @@
 package com.skypro.course2.hw8_map;
 
+import com.skypro.course2.hw8_map.drivers.Driver;
 import com.skypro.course2.hw8_map.drivers.DriverWithLicB;
 import com.skypro.course2.hw8_map.drivers.DriverWithLicC;
 import com.skypro.course2.hw8_map.drivers.DriverWithLicD;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        List<Transport> transportList = new ArrayList<>();
+        List<Transport<? extends Driver>> transportList = new ArrayList<>();
 
         ServiceStation serviceStation = new ServiceStation();
 
@@ -129,12 +130,9 @@ public class Main {
             int j = i;
             if (mechanicList.size() - 1 < i) j = i % mechanicList.size();
             System.out.println("i =" + i + ", j=" + j);
-//            serviceLog.put(transportList.get(i), mechanicList.get(j));
-            serviceLog.put(transportList.get(i), (Mechanic) transportList.get(i).getMechanicList().get(j));
-            System.out.println("test_test_test" + transportList.get(i).getMechanicList().get(j).getClass());
+            serviceLog.put(transportList.get(i), transportList.get(i).getMechanicList().get(j));
         }
-        System.out.println("test_test_test" + transportList.get(1).getMechanicList().getClass());
-        Mechanic m = (Mechanic) transportList.get(1).getMechanicList().get(4);
+
         for (Map.Entry<Transport, Mechanic> log : serviceLog.entrySet()) {
             System.out.println(log.getKey() + " maintained by " + log.getValue());
         }
