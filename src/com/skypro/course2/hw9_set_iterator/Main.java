@@ -15,10 +15,7 @@ import com.skypro.course2.hw9_set_iterator.transport.Car;
 import com.skypro.course2.hw9_set_iterator.transport.Transport;
 import com.skypro.course2.hw9_set_iterator.transport.Truck;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -119,7 +116,7 @@ public class Main {
             m.performMaintenance(transportList.get(1));
         }
 
-        // hw8_map
+        //////////////////////////// hw8_map ////////////////////////////
         for (int i = 0; i < mechanicList.size(); i++) {
             System.out.println(mechanicList.get(i));
         }
@@ -135,6 +132,18 @@ public class Main {
 
         for (Map.Entry<Transport, Mechanic> log : serviceLog.entrySet()) {
             System.out.println(log.getKey() + " maintained by " + log.getValue());
+        }
+        //////////////////////////// hw9_set_iterator ////////////////////////////
+
+        Set<Driver> driverList = new HashSet<>();
+        for (int i = 1; i <= 5; i++) {
+            driverList.add(new DriverWithLicB("Driver#" + i + " with lic. B", true, 2030 + i));
+        }
+        System.out.println("////////////////***** hw9_set_iterator *****////////////////");
+        driverList.add(new DriverWithLicB("Driver#" + 2 + " with lic. B", true, 2030 + 2));
+        Iterator<Driver> driverIterator = driverList.iterator();
+        while (driverIterator.hasNext()) {
+            System.out.println(driverIterator.next());
         }
     }
 
