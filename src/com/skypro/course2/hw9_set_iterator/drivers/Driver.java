@@ -1,5 +1,7 @@
 package com.skypro.course2.hw9_set_iterator.drivers;
 
+import java.util.Objects;
+
 public abstract class Driver {
     private String name;
     private boolean hasDriverLic;
@@ -40,4 +42,26 @@ public abstract class Driver {
     public abstract void stop();
 
     public abstract void fuelTankRefill();
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "name='" + name + '\'' +
+                ", hasDriverLic=" + hasDriverLic +
+                ", yearsOfExperience=" + yearsOfExperience +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Driver driver = (Driver) o;
+        return hasDriverLic == driver.hasDriverLic && yearsOfExperience == driver.yearsOfExperience && Objects.equals(name, driver.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, hasDriverLic, yearsOfExperience);
+    }
 }
