@@ -48,7 +48,7 @@ CROSS JOIN city;
 /*Получите имена городов, в которых никто не живет.*/
 SELECT first_name, city.city_name
 FROM employee
-FULL OUTER JOIN city
+RIGHT JOIN city
 ON employee.city_id = city.city_id
 WHERE first_name IS NULL;
 
