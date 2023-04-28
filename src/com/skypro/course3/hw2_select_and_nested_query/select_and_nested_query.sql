@@ -54,6 +54,8 @@ WHERE age = (SELECT MIN(age) FROM employee);
 SELECT first_name AS Имя, MAX(age) AS Максимальный_возраст_в_группе
 FROM employee
 GROUP BY first_name
-HAVING COUNT(first_name)>1;
+HAVING COUNT(first_name)>1
+ORDER BY Максимальный_возраст_в_группе;
+
 
 DELETE FROM employee;
